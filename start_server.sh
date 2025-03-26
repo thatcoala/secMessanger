@@ -6,10 +6,12 @@ if ! command -v python3 &> /dev/null; then
     exit 1
 fi
 
-# Проверяем, установлены ли зависимости
-if ! python3 -c "import cryptography" &> /dev/null; then
-    echo "Устанавливаем зависимости..."
-    pip3 install -r requirements.txt
+# Активируем виртуальное окружение
+if [ -d "venv" ]; then
+    source venv/bin/activate
+else
+    echo "Виртуальное окружение не найдено. Запустите install_debian.sh для установки."
+    exit 1
 fi
 
 # Запускаем сервер
